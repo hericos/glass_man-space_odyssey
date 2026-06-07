@@ -2661,6 +2661,7 @@ function initTouchControls() {
 
   container.addEventListener('touchstart', (e) => {
     if (gameState !== STATE.PLAYING) return;
+    e.preventDefault();
 
     for (let i = 0; i < e.changedTouches.length; i++) {
       const touch = e.changedTouches[i];
@@ -2711,6 +2712,7 @@ function initTouchControls() {
 
   container.addEventListener('touchmove', (e) => {
     if (gameState !== STATE.PLAYING) return;
+    e.preventDefault();
 
     for (let i = 0; i < e.touches.length; i++) {
       const touch = e.touches[i];
@@ -2754,6 +2756,10 @@ function initTouchControls() {
   }, { passive: false });
 
   const handleTouchEnd = (e) => {
+    if (gameState === STATE.PLAYING) {
+      e.preventDefault();
+    }
+
     for (let i = 0; i < e.changedTouches.length; i++) {
       const touch = e.changedTouches[i];
 
@@ -2780,6 +2786,11 @@ function initTouchControls() {
 
   container.addEventListener('touchend', handleTouchEnd, { passive: false });
   container.addEventListener('touchcancel', handleTouchEnd, { passive: false });
+
+  // Disable pinch-to-zoom gestures completely on iOS Safari
+  document.addEventListener('gesturestart', (e) => e.preventDefault());
+  document.addEventListener('gesturechange', (e) => e.preventDefault());
+  document.addEventListener('gestureend', (e) => e.preventDefault());
 }
 
 // Initialize touch controls
