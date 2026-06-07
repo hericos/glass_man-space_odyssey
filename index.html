@@ -15,8 +15,9 @@
 
 <body>
   <div id="game-container">
-    <!-- Starfield backgrounds (handled by CSS & Canvas) -->
-    <canvas id="game-canvas"></canvas>
+    <div id="game-wrapper">
+      <!-- Starfield backgrounds (handled by CSS & Canvas) -->
+      <canvas id="game-canvas"></canvas>
 
     <!-- Heads-Up Display (HUD) -->
     <div id="hud" class="hidden">
@@ -133,6 +134,25 @@
         <p>Pressione <span class="key-cap">P</span> ou clique abaixo para continuar.</p>
         <button id="resume-btn" class="glow-btn">CONTINUAR</button>
       </div>
+    </div>
+
+    <!-- Mobile Controls (Virtual D-Pads) -->
+    <div id="mobile-controls">
+      <!-- Left Side: Movement D-Pad -->
+      <div class="dpad" id="move-dpad">
+        <button class="dpad-btn dpad-up" data-key="w">▲</button>
+        <button class="dpad-btn dpad-left" data-key="a">◀</button>
+        <button class="dpad-btn dpad-down" data-key="s">▼</button>
+        <button class="dpad-btn dpad-right" data-key="d">▶</button>
+      </div>
+      <!-- Right Side: Shooting D-Pad -->
+      <div class="dpad" id="shoot-dpad">
+        <button class="dpad-btn dpad-up" data-key="arrowup">▲</button>
+        <button class="dpad-btn dpad-left" data-key="arrowleft">◀</button>
+        <button class="dpad-btn dpad-down" data-key="arrowdown">▼</button>
+        <button class="dpad-btn dpad-right" data-key="arrowright">▶</button>
+      </div>
+    </div>
     </div>
   </div>
 

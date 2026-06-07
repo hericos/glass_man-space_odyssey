@@ -549,6 +549,8 @@ function startGame() {
   document.getElementById('victory-screen').classList.add('hidden');
   document.getElementById('pause-screen').classList.add('hidden');
   document.getElementById('hud').classList.remove('hidden');
+  const mobileControls = document.getElementById('mobile-controls');
+  if (mobileControls) mobileControls.classList.add('visible');
 
   gameState = STATE.PLAYING;
   score = 0;
@@ -597,6 +599,8 @@ function startGame() {
 function pauseGame() {
   gameState = STATE.PAUSED;
   document.getElementById('pause-screen').classList.remove('hidden');
+  const mobileControls = document.getElementById('mobile-controls');
+  if (mobileControls) mobileControls.classList.remove('visible');
   const context = AudioSynth.getContext();
   if (context && context.state !== 'suspended') {
     context.suspend();
@@ -606,6 +610,8 @@ function pauseGame() {
 function resumeGame() {
   gameState = STATE.PLAYING;
   document.getElementById('pause-screen').classList.add('hidden');
+  const mobileControls = document.getElementById('mobile-controls');
+  if (mobileControls) mobileControls.classList.add('visible');
   AudioSynth.init();
 }
 
@@ -615,6 +621,8 @@ function triggerGameOver() {
   document.getElementById('final-score').innerText = score;
   document.getElementById('final-rooms').innerText = (floorIndex - 1) * 3 + roomIndex - 1;
   document.getElementById('game-over-screen').classList.remove('hidden');
+  const mobileControls = document.getElementById('mobile-controls');
+  if (mobileControls) mobileControls.classList.remove('visible');
   AudioSynth.stopMusic();
   AudioSynth.play('shatter');
 }
@@ -625,6 +633,8 @@ function triggerVictory() {
   document.getElementById('victory-score').innerText = score;
   document.getElementById('victory-kills').innerText = Math.floor(score / 50);
   document.getElementById('victory-screen').classList.remove('hidden');
+  const mobileControls = document.getElementById('mobile-controls');
+  if (mobileControls) mobileControls.classList.remove('visible');
   AudioSynth.stopMusic();
   AudioSynth.play('powerup');
 }
@@ -2564,3 +2574,75 @@ function gameLoop(time) {
 
 // Start visual tick
 requestAnimationFrame(gameLoop);
+
+// --- Responsive Sizing & Proportional Scaling for Mobile/iPad ---
+function resizeGame() {
+  const wrapper = document.getElementById('game-wrapper');
+  if (!wrapper) return;
+
+  const targetWidth = 900;
+  const targetHeight = 600;
+
+  // Add small padding to prevent clipping on edge-to-edge device screens
+  const windowWidth = window.innerWidth - 16;
+  const windowHeight = window.innerHeight - 16;
+
+  const scaleX = windowWidth / targetWidth;
+  const scaleY = windowHeight / targetHeight;
+  
+  // Choose the lower scale to fully fit the window, upscaling is allowed on larger screens
+  const scale = Math.min(scaleX, scaleY);
+  
+  // Apply the CSS scale transformation
+  wrapper.style.transform = `scale(${scale})`;
+  wrapper.style.transformOrigin = 'center';
+}
+
+// Event Listeners for window resize and orientation changes
+window.addEventListener('resize', resizeGame);
+window.addEventListener('orientationchange', resizeGame);
+// Run on initial load
+window.addEventListener('DOMContentLoaded', resizeGame);
+resizeGame();
+
+// --- Mobile Touch D-Pad Input Emulation ---
+function initTouchControls() {
+  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
+  if (isTouchDevice) {
+    document.body.classList.add('is-touch');
+  }
+
+  const buttons = document.querySelectorAll('.dpad-btn');
+  buttons.forEach(btn => {
+    const key = btn.getAttribute('data-key');
+    if (!key) return;
+
+    const pressKey = (e) => {
+      e.preventDefault();
+      keys[key] = true;
+    };
+
+    const releaseKey = (e) => {
+      e.preventDefault();
+      keys[key] = false;
+    };
+
+    // Listen to touch events
+    btn.addEventListener('touchstart', pressKey, { passive: false });
+    btn.addEventListener('touchend', releaseKey, { passive: false });
+    btn.addEventListener('touchcancel', releaseKey, { passive: false });
+
+    // Fallback mouse events for ease of testing on desktop
+    btn.addEventListener('mousedown', (e) => {
+      keys[key] = true;
+    });
+    const releaseMouse = () => {
+      keys[key] = false;
+    };
+    btn.addEventListener('mouseup', releaseMouse);
+    btn.addEventListener('mouseleave', releaseMouse);
+  });
+}
+
+// Initialize touch controls
+initTouchControls();

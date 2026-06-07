@@ -39,6 +39,17 @@ body, html {
   overflow: hidden;
 }
 
+#game-wrapper {
+  position: relative;
+  width: 900px;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  touch-action: none;
+}
+
 /* Starfield / Deep space animations via CSS */
 #game-container::before {
   content: "";
@@ -537,4 +548,65 @@ body, html {
   color: #ffffff;
   text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
 }
+
+/* Mobile Controls styling */
+#mobile-controls {
+  display: none;
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  right: 30px;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 25;
+}
+
+/* Show touch controls on touch devices when active in gameplay */
+.is-touch #mobile-controls.visible {
+  display: flex;
+}
+
+.dpad {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  pointer-events: auto;
+}
+
+.dpad-btn {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  transition: all 0.1s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+
+.dpad-btn:active {
+  background: var(--neon-cyan-glow);
+  border-color: var(--neon-cyan);
+  transform: scale(0.9);
+  box-shadow: 0 0 15px var(--neon-cyan);
+}
+
+#shoot-dpad .dpad-btn:active {
+  background: var(--neon-magenta-glow);
+  border-color: var(--neon-magenta);
+  box-shadow: 0 0 15px var(--neon-magenta);
+}
+
+.dpad-up { top: 0; left: 39px; }
+.dpad-down { bottom: 0; left: 39px; }
+.dpad-left { left: 0; top: 39px; }
+.dpad-right { right: 0; top: 39px; }
 
