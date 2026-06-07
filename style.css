@@ -237,6 +237,25 @@ body, html {
   font-weight: bold;
 }
 
+.author-credits {
+  font-family: var(--font-title);
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: -20px;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.author-credits:hover {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 8px var(--neon-cyan-glow);
+  letter-spacing: 4px;
+}
+
 .modal p {
   font-size: 1.05rem;
   color: rgba(255, 255, 255, 0.8);
