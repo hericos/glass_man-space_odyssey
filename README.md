@@ -11,6 +11,17 @@ Acesse o jogo hospedado e dispute o recorde no ranking global:
 
 ---
 
+## 📱 Instalação no Celular (PWA)
+
+Para rodar o jogo no celular sem aparecer a barra de endereços do navegador (em tela cheia):
+
+1. Abra o navegador do celular e acesse o endereço do jogo (local, staging ou o link oficial).
+2. Siga as etapas abaixo dependendo do seu aparelho:
+   - **No Android / Chrome**: Deve aparecer a opção automática de instalar ou, ao abrir as opções do navegador (três pontos), clique em **"Adicionar à tela inicial"**. O jogo será instalado e rodará sem barras do navegador.
+   - **No iOS / Safari**: Clique no botão de **Compartilhar** (ícone de seta para cima) -> **"Adicionar à Tela de Início"**. O jogo abrirá em tela cheia com a barra de status translúcida/escura.
+   
+---
+
 ## 🎮 Mecânicas do Jogo
 
 No controle do **Homem de Vidro**, você deve explorar salas espaciais repletas de criaturas alienígenas, coletando upgrades premium para sobreviver:
@@ -35,3 +46,6 @@ Este projeto foi uma colaboração incrível e especial:
 - 🤖 **Tecnologia de IA**: Codificado em conjunto com o modelo **Gemini 3.5 Flash** (Google DeepMind)
 
 Utilizando a imaginação inovadora do Henzo, a mentoria de seu pai Herico, e a inteligência (artificial) do Gemini, desenvolvemos esta experiência rápida, fluida e totalmente nativa (Vanilla JS, CSS Grid/Flexbox, HTML5 Canvas e Web Audio API sintetizada, sem nenhuma dependência ou biblioteca externa pesada).
+
+
+
