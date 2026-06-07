@@ -586,7 +586,7 @@ window.addEventListener('blur', () => {
 async function registerPlayer(name) {
   playerName = name.trim();
   try {
-    const response = await fetch('https://n8n.grupodailydeals.tech/webhook-test/novo-jogador', {
+    const response = await fetch('https://n8n.grupodailydeals.tech/webhook/novo-jogador', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
