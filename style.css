@@ -256,6 +256,19 @@ body, html {
   letter-spacing: 4px;
 }
 
+.version-tag {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-family: var(--font-title);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 1px;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  z-index: 30;
+}
+
 .modal p {
   font-size: 1.05rem;
   color: rgba(255, 255, 255, 0.8);
